@@ -109,7 +109,11 @@ public OnGameModeInit()
 public OnPlayerConnect(playerid)
 {
 	TogglePlayerSpectating(playerid, 1);
-	if(gameState == gameStatePlaying)
+	if(gameState == gameStateWaitingForPlayers)
+	{
+		TriggerNextRount();
+	}
+	else
 	{
 		TextDrawShowForAll(TextdrawPlayerDistance);
 		
@@ -117,12 +121,7 @@ public OnPlayerConnect(playerid)
 		hunterCount++;
 		
 		TriggerSpawn(playerid, startPositions[startIndex][0], startPositions[startIndex][1], startPositions[startIndex][2], 0);
-	}
-	else if(gameState == gameStateWaitingForPlayers)
-	{
-		TriggerNextRount();
-	}
-	
+	}	
 }
 
 public OnPlayerDisconnect(playerid, reason)
